@@ -4,10 +4,8 @@ namespace TerracorTestFramework.Utilities
 {
     public static class DriverHelper
     {
-        // ✅ Declare as nullable with `?`
         public static IWebDriver? driver;
 
-        // Optional helper method
         public static IWebDriver GetDriver()
         {
             if (driver == null)
