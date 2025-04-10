@@ -20,7 +20,6 @@ namespace TerracorTestFramework.Utilities
             return JsonSerializer.Deserialize<T>(jsonString) ?? throw new InvalidDataException("Failed to deserialize JSON.");
         }
 
-        // Convenience method for loading TestData.json specifically
         public static TestDataModel LoadTestData()
         {
             return LoadJson<TestDataModel>("TestData.json");

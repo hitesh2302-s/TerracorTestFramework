@@ -45,7 +45,7 @@ namespace TerracorTestFramework.Pages
             for (int i = 0; i < quantity; i++)
             {
                 addButton.Click();
-                System.Threading.Thread.Sleep(3000); // Add small wait to ensure click registers
+                System.Threading.Thread.Sleep(3000); 
             }
         }
 
@@ -75,7 +75,7 @@ namespace TerracorTestFramework.Pages
         {
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(30));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(emptyCart)).Click();
-            Thread.Sleep(2000); // or better, wait for an element that indicates the cart is cleared
+            Thread.Sleep(2000); 
         }
 
         public bool IsCartEmpty()
