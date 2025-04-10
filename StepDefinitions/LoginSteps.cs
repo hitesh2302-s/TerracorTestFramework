@@ -3,6 +3,7 @@ using TechTalk.SpecFlow;
 using TerracorTestFramework.Pages;
 using TerracorTestFramework.Utilities;
 using NUnit.Framework;
+using TerracorTestFramework.Models;
 
 namespace TerracorTestFramework.StepDefinitions
 {
@@ -11,11 +12,13 @@ namespace TerracorTestFramework.StepDefinitions
     {
         private IWebDriver _driver;
         private LoginPage _loginPage;
+        private TestDataModel _testData;
 
         public LoginSteps()
         {
             _driver = DriverHelper.GetDriver();
             _loginPage = new LoginPage(_driver);
+            _testData = JsonDataReader.LoadTestData();
         }
 
         [Given(@"I launch the browser")]
@@ -27,7 +30,7 @@ namespace TerracorTestFramework.StepDefinitions
         [Given(@"I navigate to the TerraCor Hub page")]
         public void GivenINavigateToTheSite()
         {
-            _driver.Navigate().GoToUrl("https://hub-demo.terracor.ca/_staging/search?limit=12");
+            _driver.Navigate().GoToUrl(_testData.Url ?? throw new InvalidOperationException("URL is missing in TestData.json"));
         }
 
         [When(@"I click the login page")]
@@ -39,8 +42,8 @@ namespace TerracorTestFramework.StepDefinitions
         [When(@"I enter the username and password")]
         public void WhenIEnterUsernamePassword()
         {
-            _loginPage.EnterUsername("user976272");
-            _loginPage.EnterPassword("Password@123");
+            _loginPage.EnterUsername(_testData.LoginCredentials.Username ?? throw new InvalidOperationException("Username is missing in TestData.json"));
+            _loginPage.EnterPassword(_testData.LoginCredentials.Password ?? throw new InvalidOperationException("Password is missing in TestData.json"));
         }
 
         [When(@"I click the login button")]
